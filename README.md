@@ -16,5 +16,12 @@ Distros installed from the MS Store can only be installed once. To install multi
 
 ### Set default user for distro
 In /etc/wsl.conf
-> [user]
-> default=username
+```
+[user]
+default=username
+```
+# Docker
+Run this config in a docker container and bind pwd to /code. This command is available as alias `docker-dev-env`.
+```docker
+docker run -it --mount type=bind,source="$(pwd)",target=/code alexmu/dev-env
+```
