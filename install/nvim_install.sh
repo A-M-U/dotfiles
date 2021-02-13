@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # install nvim as appimage (in sugguested location ${HOME}/Applications/ or ${HOME}/.local/bin/ or ${HOME}/bin/)
 cd ~/.local/bin 

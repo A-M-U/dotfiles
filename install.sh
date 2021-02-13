@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 # Default settings
 SKIP_ZSHRC=${SKIP_ZSHRC:-no}     # add XDG settings and PATH to zshrc. Skip with --skip-zsh
 SKIP_BASHRC=${SKIP_BASHRC:-no}   # add XDG settings and PATH to bashrc. Skip with --skip-bash

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 ZSH=${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh
 ZSH_CUSTOM=$ZSH/custom
 
@@ -8,11 +8,11 @@ FULL_INSTALL=yes
 HELP=no
 
 plugins=(
-    "/zsh-users/zsh-syntax-highlighting"
-    "/agkozak/zsh-z"
-    "/zsh-users/zsh-autosuggestions"
-    "/changyuheng/zsh-interactive-cd"
-    "/wfxr/forgit"
+    /zsh-users/zsh-syntax-highlighting
+    /agkozak/zsh-z
+    /zsh-users/zsh-autosuggestions
+    /changyuheng/zsh-interactive-cd
+    /wfxr/forgit
 )
 
 themes=("/romkatv/powerlevel10k")
