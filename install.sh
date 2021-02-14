@@ -24,12 +24,10 @@ appendXDGandPATHToRcFile() {
 installEnvironment() {
 # update sources
 sudo apt update && apt upgrade -y
-
-# call isntall scripts
-sh $SCRIPTPATH/install/zsh_install.sh
-sh $SCRIPTPATH/install/python_install.sh
-sh $SCRIPTPATH/install/utils_install.sh
-sh $SCRIPTPATH/install/nvim_install.sh
+$SCRIPTPATH/install/zsh_install.sh
+$SCRIPTPATH/install/python_install.sh
+$SCRIPTPATH/install/utils_install.sh
+$SCRIPTPATH/install/nvim_install.sh
 }
 
 

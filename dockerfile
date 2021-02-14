@@ -15,6 +15,6 @@ WORKDIR /home/docker
 
 # copy and install dev environment
 COPY . /home/docker/dotfiles
-RUN bash -c '/home/docker/dotfiles/install.sh | tee /home/docker/dotfiles_install.log'
+RUN /home/docker/dotfiles/install.sh | tee /home/docker/dotfiles_install.log
 
 ENTRYPOINT exec zsh
