@@ -22,5 +22,5 @@ map <A-]> :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 let g:gutentags_project_root = ['Makefile']
 
 " save tags in separate dir
-let g:gutentags_cache_dir = $vim_dir."/tags"
+let g:gutentags_cache_dir = $vim_data_dir."/tags"
 
