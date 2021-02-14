@@ -24,7 +24,7 @@ sh -c 'git clone https://github.com/k-takata/minpac.git "${XDG_CONFIG_HOME:-$HOM
 ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
 ln -s ~/dotfiles/nvim/config ~/.config/nvim/config
 ~/.local/bin/nvim --headless +"call minpac#update()" +qa
-~/.local/bin/nvim --headless +"CocInstall -sync coc-clangd  coc-cmake  coc-explorer  coc-json  coc-lists  coc-pyright coc-snippets coc-sh coc-vimlsp coc-yaml coc-yank" +qa
+~/.local/bin/nvim --headless +"CocInstall -sync coc-clangd coc-cmake coc-explorer coc-json coc-pyright coc-snippets coc-sh coc-vimlsp coc-yaml coc-yank" +qa
 
 # create default local nvim config if none exists
 LOCAL_VIMRC=~/.config/nvim/local.vim

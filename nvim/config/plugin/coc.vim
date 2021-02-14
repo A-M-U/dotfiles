@@ -7,7 +7,6 @@ let g:coc_global_extensions = [
     \ 'coc-cmake', 
     \ 'coc-explorer', 
     \ 'coc-json', 
-    \ 'coc-lists', 
     \ 'coc-pyright', 
     \ 'coc-snippets',
     \ 'coc-sh',
