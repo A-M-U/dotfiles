@@ -9,16 +9,21 @@ https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel1
 ### Multiple instances of the same distro
 Distros installed from the MS Store can only be installed once. To install multiple instances of the same distro use export/import feature of wsl.
 
-1. Install distro from store. Export the bare distro to a location (e.g. C:/wsl/images/distroname-bare). This way every imported distro has the same user.
-2. (optional) Install used tools and export the distro again. (e.g. C:/wsl/images/distroname-minimal)
-3. Unregister the installed distro from the ms store. This way it is possible to install the distro anytime again.
-3. Import a distro from the created images and change the deault user.
+1. Install distro from store.
+2. Create `/etc/wsl.conf`
+3. Export the bare distro to a location (e.g. C:/wsl/images/distroname-bare). This way every imported distro has the same user.
+4. (optional) Install used tools and export the distro again. (e.g. C:/wsl/images/distroname-minimal)
+5. Unregister the installed distro from the ms store. This way it is possible to install the distro anytime again.
+6. Import a distro from the created images and change the deault user.
 
-### Set default user for distro
+### WSL config setting for distro
 In /etc/wsl.conf
 ```
 [user]
 default=username
+
+[automount]
+enabled = true
 ```
 # Docker
 Run this config in a docker container and bind pwd to /code. This command is available as alias `docker-dev-env`.
