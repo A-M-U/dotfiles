@@ -1,6 +1,9 @@
 # set the default editor. Is used for aliases 
 export EDITOR="$(which nvim)"
 
+#######################################################################################################################
+# Oh-my-zsh settings
+#######################################################################################################################
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 plugins=(
@@ -15,15 +18,25 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 source $ZSH/custom/plugins/forgit/forgit.plugin.zsh
 source $ZSH/custom/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
-source $ZSH_DOT_DIR/zsh_aliases
 source $ZSH_DOT_DIR/p10k.zsh
-
-# change the foreground color to black for the ls command
-LS_COLORS=$LS_COLORS:'ow=30;42'; export LS_COLORS
 
 # Zsh plugin key bindings
 # accept the suggestion 
 bindkey '^l' autosuggest-accept
+
+#######################################################################################################################
+# Aliases
+#######################################################################################################################
+alias zshconf="$EDITOR $ZSH_DOT_DIR/zshrc"
+alias ohmyzsh="$EDITOR $ZSH/oh-my-zsh"
+alias tx="tmuxinator"
+alias docker-dev-env="docker run -it --mount type=bind,source="$(pwd)",target=/code alexmu/dev-env"
+
+#######################################################################################################################
+# System settigns
+#######################################################################################################################
+# change the foreground color to black for the ls command
+LS_COLORS=$LS_COLORS:'ow=30;42'; export LS_COLORS
 
 # export FZF_DEFAULT_COMMAND='ag'
 export FZF_DEFAULT_OPTS="--layout=reverse --inline-info"
@@ -35,6 +48,9 @@ export VIRTUALENVWRAPPER_PYTHON=$(which python3)
 export VIRTUALENVWRAPPER_VIRTUALENV=~/.local/bin/virtualenv
 source ~/.local/bin/virtualenvwrapper.sh
 
+#######################################################################################################################
+# Functions
+#######################################################################################################################
 # Execute multiple sleceted lines from file
 function fcat {
     cat $1 | fzf-tmux -m | while read line; do eval $line; done

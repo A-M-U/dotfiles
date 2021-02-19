@@ -1,4 +1,0 @@
-alias zshconf="$EDITOR $ZSH_DOT_DIR/zshrc"
-alias ohmyzsh="$EDITOR $ZSH/oh-my-zsh"
-alias tx="tmuxinator"
-alias docker-dev-env="docker run -it --mount type=bind,source="$(pwd)",target=/code alexmu/dev-env"
