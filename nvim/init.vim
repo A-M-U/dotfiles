@@ -23,6 +23,7 @@ endif
 call minpac#add('junegunn/gv.vim')
 call minpac#add('tpope/vim-commentary')
 call minpac#add('tpope/vim-repeat')
+call minpac#add('tpope/vim-rsi')
 call minpac#add('tpope/vim-surround')
 
 " plugins with configuration
