@@ -24,6 +24,10 @@ appendXDGandPATHToRcFile() {
 installEnvironment() {
 # update sources
 sudo apt update && apt upgrade -y
+sudo -y apt install curl \
+                    git \
+                    vim
+
 $SCRIPTPATH/install/zsh_install.sh
 $SCRIPTPATH/install/python_install.sh
 $SCRIPTPATH/install/utils_install.sh
