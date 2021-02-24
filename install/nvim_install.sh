@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )" # get path to this file
 
 # install nvim as appimage (in sugguested location ${HOME}/Applications/ or ${HOME}/.local/bin/ or ${HOME}/bin/)
 cd ~/.local/bin 
@@ -21,8 +22,8 @@ sudo npm install -g neovim
 
 # get plugin manager, setup nvim config and install plugins
 sh -c 'git clone https://github.com/k-takata/minpac.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim/pack/minpac/opt/minpac'
-ln -s ~/dotfiles/nvim/init.vim ~/.config/nvim/init.vim
-ln -s ~/dotfiles/nvim/config ~/.config/nvim/config
+ln -s $SCRIPTPATH/../nvim/init.vim ~/.config/nvim/init.vim
+ln -s $SCRIPTPATH/../nvim/config ~/.config/nvim/config
 ~/.local/bin/nvim --headless +"call minpac#update()" +qa
 ~/.local/bin/nvim --headless +"CocInstall -sync coc-clangd coc-cmake coc-explorer coc-json coc-pyright coc-snippets coc-sh coc-vimlsp coc-yaml coc-yank" +qa
 

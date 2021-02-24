@@ -1,4 +1,5 @@
 #!/bin/bash
+SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )" # get path to this file
 
 mkdir -p ~/.local/bin
 
@@ -19,7 +20,7 @@ ${XDG_CONFIG_HOME:-$HOME/.config}/fzf/install --all --xdg
 
 # install tmux and create a symlink to the config
 sudo apt install tmux -y
-ln -s ~/dotfiles/tmux/tmux.conf ~/.tmux.conf
+ln -s $SCRIPTPATH/../tmux/tmux.conf ~/.tmux.conf
 
 #tmux plugins
 git clone https://github.com/tmux-plugins/tmux-yank $HOME/.config/tmux/tmux-yank
