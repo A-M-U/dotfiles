@@ -1,6 +1,9 @@
 #!/bin/bash
+SCRIPTPATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )" # get path to this file
+
 ZSH=${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh
 ZSH_CUSTOM=$ZSH/custom
+ZSHRC=~/.zshrc
 
 PLUGINS_INSTALL_ONLY=no
 PLUGINS_UPDATE_ONLY=no
@@ -28,7 +31,7 @@ installZsh() {
 installPlugins(){
     for i in "${plugins[@]}"; do
         dirName=$(echo "$i" | awk -F "/" '{print $3}')
-		if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$dirName ]; then 
+        if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$dirName ]; then
             git clone https://github.com$i ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$dirName
         fi
     done
@@ -39,7 +42,7 @@ updatePlugins(){
         echo "Update Plugin: $i"
         dirName=$(echo "$i" | awk -F "/" '{print $3}')
         cd ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/$dirName
-        git pull 
+        git pull
         cd -
     done
 }
@@ -47,7 +50,7 @@ updatePlugins(){
 installThemes(){
     for i in "${themes[@]}"; do
         dirName=$(echo "$i" | awk -F "/" '{print $3}')
-		if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/$dirName ]; then 
+        if [ ! -d ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/$dirName ]; then
             git clone --depth=1 https://github.com$i ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/$dirName
         fi
     done
@@ -61,6 +64,18 @@ updateThemes(){
         git pull
         cd -
     done
+}
+
+prependPowerline10kSettingsToZshrc(){
+    cat $ZSHRC > $ZSHRC.blub
+    echo '# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.' > $ZSHRC
+    echo '# Initialization code that may require console input (password prompts, [y/n]' >> $ZSHRC
+    echo '# confirmations, etc.) must go above this block; everything else may go below.' >> $ZSHRC
+    echo 'if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then' >> $ZSHRC
+    echo '  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"' >> $ZSHRC
+    echo -e "fi\n" >> $ZSHRC
+    cat $ZSHRC.blub >> $ZSHRC
+    rm $ZSHRC.blub
 }
 
 main() {
@@ -77,22 +92,16 @@ main() {
     if [ $FULL_INSTALL = yes ]; then
         installZsh
 
-		ZSHRC=~/.zshrc
-		if [ -f $ZSHRC ]; then 
-			# the '-' allows the heredoc to be indented 
-			# the ' surrounding the delimeter leads to not expanding the $VARs in the multiline comment
-			cat <<- 'EOF' >> $ZSHRC
-			if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-			  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-			fi
-		
-			[[ -z "$ZSH" ]] && export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh"
-			[[ -z "$ZSH_CUSTOM" ]] && export ZSH_CUSTOM="$ZSH/custom"
-			[[ -z "$ZSH_DOT_DIR" ]] && export ZSH_DOT_DIR="$HOME/dotfiles/zsh"
-			
-			source $ZSH_DOT_DIR/zshrc
-			EOF
-		fi
+        if [ -f $ZSHRC ]; then
+            prependPowerline10kSettingsToZshrc
+
+            echo '[[ -z "$ZSH" ]] && export ZSH="${XDG_CONFIG_HOME:-$HOME/.config}/oh-my-zsh"' >> $ZSHRC
+            echo '[[ -z "$ZSH_CUSTOM" ]] && export ZSH_CUSTOM="$ZSH/custom"' >> $ZSHRC
+            echo '[[ -z "$ZSH_DOT_DIR" ]] && export ZSH_DOT_DIR="'$SCRIPTPATH'/../zsh"' >> $ZSHRC
+
+            echo "\n"
+            echo 'source $ZSH_DOT_DIR/zshrc' >> $ZSHRC
+        fi
         installPlugins
         installThemes
     elif [ $PLUGINS_INSTALL_ONLY = yes ]; then
@@ -106,7 +115,7 @@ main() {
         echo "--update-plugins      - Update plugins and themes only"
     else
         echo "Selection not supported"
-    fi 
+    fi
 }
 
 main "$@"
