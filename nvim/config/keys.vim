@@ -18,6 +18,8 @@ inoremap <A-h> <Esc><c-w>h
 inoremap <A-j> <Esc><c-w>j
 inoremap <A-k> <Esc><c-w>k
 inoremap <A-l> <Esc><c-w>l
+inoremap jk <Esc>
+inoremap kj <Esc>
 " Visual mode:
 vnoremap <A-h> <Esc><c-w>h
 vnoremap <A-j> <Esc><c-w>j
