@@ -24,7 +24,7 @@ appendXDGandPATHToRcFile() {
 installEnvironment() {
 # update sources
 sudo apt update && apt upgrade -y
-sudo -y apt install curl \
+sudo apt -y install curl \
                     git \
                     vim
 
